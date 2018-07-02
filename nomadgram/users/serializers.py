@@ -2,9 +2,10 @@ from rest_framework import serializers
 from . import models
 from nomadgram.images import serializers as images_serializers
 
-class UserPorfileSerializer(serializers.ModelSerializer):
 
-    images = images_serializers.UserPorfileImageSerializer(many=True)
+class UserProfileSerializer(serializers.ModelSerializer):
+
+    images = images_serializers.CountImageSerializer(many=True)
 
     class Meta:
         model = models.User
@@ -19,7 +20,7 @@ class UserPorfileSerializer(serializers.ModelSerializer):
             'images'
         )
 
-class ExploreUserSerializer(serializers.ModelSerializer):
+class ListUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.User
