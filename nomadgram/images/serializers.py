@@ -1,6 +1,8 @@
 from rest_framework import serializers
+from taggit_serializer.serializers import(TagListSerializerField, TaggitSerializer)
 from . import models
 from nomadgram.users import models as user_models
+
 
 
 class SmallImageSerializer(serializers.ModelSerializer):
@@ -50,11 +52,12 @@ class LikeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ImageSerializer(serializers.ModelSerializer):
+class ImageSerializer(TaggitSerializer, serializers.ModelSerializer):
 
     comments = CommentSerializer(many=True)
     #likes = LikeSerializer(many=True)
     creator = FeedUserSerializer()
+    tags = TagListSerializerField()
 
     class Meta:
         model = models.Image
@@ -64,12 +67,26 @@ class ImageSerializer(serializers.ModelSerializer):
             'location',
             'caption',
             'comments',
-            # 'likes',
+            #'likes',
             'like_count',
             'creator',
-            # 'tags',
-            # 'natural_time',
-            # 'is_liked',
-            # 'is_vertical'
+            'tags',
+            'created_at',
+            #'tags',
+           # 'natural_time',
+           # 'is_liked',
+           # 'is_vertical'
         )
 
+
+class InputImageSerializer(serializers.ModelSerializer):
+
+    #file = serializers.FileField(required=False)
+
+    class Meta:
+        model = models.Image
+        fields = (
+            'file',
+            'location',
+            'caption',
+        )
