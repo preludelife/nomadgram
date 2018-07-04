@@ -51,7 +51,8 @@ urlpatterns = [
         regex=r'^(?P<username>\w+)/password/$',
         view=views.ChangePassword.as_view(),
         name='change'
-    ),    
+    ),   
+    url(r'^login/facebook/$', views.FacebookLogin.as_view(), name='fb_login'),
     # url(
     #     regex=r'^(?P<username>\w+)/following/$',
     #     view=views.UserFollowingFBV,
